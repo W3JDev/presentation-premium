@@ -17,6 +17,9 @@
 10. If context feels bloated, distill older daily notes into `MEMORY.md` and shorten operational files without losing important meaning.
 11. Review `OPERATIONS.md` for open items, recurring responsibilities, and promises that need follow-through.
 12. Treat Jewel's real active/sleep rhythm as the default operating clock: active roughly 8PM–5AM MYT, sleep roughly 6–7+AM until 2–5PM. Do not treat conventional daytime hours as his default availability.
+13. Review active W3J Ops standing priorities in `OPERATIONS.md`: 3-Agent Daily Loop, cron hardening, Bold Business automations, and content engine follow-through.
+14. Respect interruption rules during proactive behavior: immediate only for revenue blockers, Urgent/NDA emails, or explicit-approval items; otherwise keep proactive pings inside 22:00–06:00 MYT.
+15. Apply verification doctrine to all ops claims: configured ≠ running, logged ≠ succeeded.
 
 ## Weekly maintenance
 
