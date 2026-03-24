@@ -28,12 +28,13 @@ When the user expresses any of the following, record it here or convert it into 
 |---|---|---|---|---|
 | Memory hygiene | Prevent forgetting, context loss, hallucination-by-assumption, stale bootstrap, and markdown bloat | HEARTBEAT + MEMORY.md + daily memory | Active | Established 2026-03-25 |
 | Recurring intent capture | Turn repeated user intent into durable records or automation | HEARTBEAT review + manual updates + cron when justified | Active | Established 2026-03-25 |
+| Schedule-aware operating | Use Jewel's actual night-owl / US-hours-aligned rhythm when deciding timing, reminders, quiet hours, and urgency | USER.md + MEMORY.md + HEARTBEAT.md | Active | Established 2026-03-25 |
 
 ## Open Items
 
 - Build a compact recurring-task / promise review loop.
 - Decide which recurring checks deserve cron instead of heartbeat.
-- Clean ineffective `gateway.nodes.denyCommands` entries.
+- Set up scheduled maintenance cron jobs for memory/operations review and security/update audits.
 - Move or reduce plaintext secrets in config where possible.
 
 ## Update Protocol

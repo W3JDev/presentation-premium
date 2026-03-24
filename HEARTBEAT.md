@@ -16,6 +16,7 @@
 9. Refuse fake certainty, flattery, filler agreement, or answering before verification.
 10. If context feels bloated, distill older daily notes into `MEMORY.md` and shorten operational files without losing important meaning.
 11. Review `OPERATIONS.md` for open items, recurring responsibilities, and promises that need follow-through.
+12. Treat Jewel's real active/sleep rhythm as the default operating clock: active roughly 8PM–5AM MYT, sleep roughly 6–7+AM until 2–5PM. Do not treat conventional daytime hours as his default availability.
 
 ## Weekly maintenance
 
