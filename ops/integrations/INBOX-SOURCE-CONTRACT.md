@@ -11,6 +11,7 @@ Define the verified inbox access path MailTriage is allowed to use.
 - Gmail / Google-related auth exists in workspace `.env`
 - Composio-related Gmail auth config IDs exist in workspace `.env`
 - Gmail app-password entries exist in workspace `.env`
+- `gog` is installed locally and may provide an alternate Google/Gmail inspection path
 
 ## Required verification before MailTriage can be considered live
 - choose the primary inbox access path

@@ -11,11 +11,17 @@ Define how this host/runtime is expected to execute Composio-backed actions.
 - COMPOSIO_API_KEY exists in workspace `.env`
 - Multiple Composio auth config IDs exist in workspace `.env`
 
+## Current runtime findings
+- local `composio` CLI not found
+- local Python Composio SDK not found
+- local Google API client libraries not found
+- `mcporter` is installed at `/usr/local/bin/mcporter`
+- `gog` is installed at `/home/linuxbrew/.linuxbrew/bin/gog`
+
 ## Missing verification
-- confirmed local SDK path
-- confirmed CLI path
-- confirmed MCP/server path for this runtime
+- confirmed MCP/server path for Google Drive/Gmail/Tasks via `mcporter`
 - minimum working command or tool route for Drive/Gmail/Tasks calls
+- whether `gog` is authenticated and useful for fallback inspection
 
 ## Policy
 Configured env keys are not treated as proof of live execution.
