@@ -89,10 +89,11 @@ When the user expresses any of the following, record it here or convert it into 
 
 ## Open Items
 
-- Build the 3-Agent Daily Loop so it runs reliably at session boot time.
+- Verify the live run outputs for the scheduled `W3J Ops Nightly Session Briefing` cron job.
+- Verify the live run outputs for the scheduled `W3J Google Drive Meeting Notes Poller` cron job.
 - Implement cron/job verification workflow with live execution checks and per-job logs.
 - Build QuickBooks Time automation with verified 2FA/session handling.
-- Build Google Drive meeting-notes → Google Tasks pipeline with dedupe via Composio MCP.
+- Harden Google Drive meeting-notes → Google Tasks pipeline from scheduled skeleton into verified end-to-end Composio execution.
 - Build LinkedIn growth pipeline and daily Bijou blog drafting flow.
 - Set up scheduled maintenance cron jobs for memory/operations review and security/update audits.
 - Move or reduce plaintext secrets in config where possible.
