@@ -15,6 +15,7 @@ Define the exact Google Drive transcript/meeting-note sources the poller is allo
 
 ## Current state
 No verified folder IDs, shared drive IDs, or query rules are documented yet.
+- `gog` is installed and supports Drive/shared-drive listing, but is currently not authenticated on this host.
 
 ## Policy
 The poller must not guess source identifiers.

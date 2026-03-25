@@ -25,5 +25,8 @@ Define the verified inbox access path MailTriage is allowed to use.
 1. `gog` Gmail access (near-term verification path)
 2. Composio Gmail integration (preferred long-term integration surface)
 
+## Runtime verification result
+- `gog` is installed and supports Gmail, but is currently **not authenticated** on this host (`credentials_exists: false`, no configured account).
+
 ## Temporary status
 MailTriage should continue writing `blocked-no-inbox-access` until one of the above paths is verified from this host/runtime.

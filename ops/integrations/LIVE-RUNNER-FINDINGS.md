@@ -25,9 +25,12 @@ Runtime results:
 2. `gog` is installed and exposes first-class commands for Gmail, Drive, Calendar, and Tasks.
 
 Current best runner candidate:
-- `gog` is the fastest verified local Google runner path to inspect next.
+- `gog` is the fastest verified local Google runner path.
+
+Auth result:
+- `gog status --json --no-input` reports no local credentials/config yet (`credentials_exists: false`, config missing)
 
 ## Immediate next actions
-- inspect `gog` auth/account status
-- if authenticated, use `gog` as the first practical path for inbox/Drive/Tasks verification
-- keep Composio as the preferred long-term integration surface, but do not block immediate verification on a missing local Composio runner
+- authenticate `gog` if we choose it as the near-term Google runner
+- or verify a different existing Google/Composio execution path
+- keep Composio as the preferred long-term integration surface, but do not confuse configured env keys with live host access
