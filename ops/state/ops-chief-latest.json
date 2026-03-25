@@ -1,0 +1,7 @@
+{
+  "generatedAt": null,
+  "briefingPath": null,
+  "mailtriageSource": "ops/state/mailtriage-latest.json",
+  "taskboardSource": "ops/state/taskboard-latest.json",
+  "status": "not-run"
+}
