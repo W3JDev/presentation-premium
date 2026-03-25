@@ -18,11 +18,16 @@ Owner: Luffy
 - Gmail app-password entries
 
 ## Interpretation
-The host has live Google/Composio-related credentials/config, but the obvious local runner is not a Composio SDK/CLI install. The most promising verification paths are:
-1. `mcporter` for MCP/server discovery and invocation
-2. `gog` for Google/Gmail capability inspection or fallback access checks
+The host has live Google/Composio-related credentials/config, but the obvious local runner is not a Composio SDK/CLI install.
+
+Runtime results:
+1. `mcporter` is installed, but currently reports **no MCP servers configured**.
+2. `gog` is installed and exposes first-class commands for Gmail, Drive, Calendar, and Tasks.
+
+Current best runner candidate:
+- `gog` is the fastest verified local Google runner path to inspect next.
 
 ## Immediate next actions
-- inspect `mcporter` for connected MCP/server definitions relevant to Google/Composio
-- inspect `gog` auth state/capabilities
-- use the verified path to update inbox and Google pipeline contracts
+- inspect `gog` auth/account status
+- if authenticated, use `gog` as the first practical path for inbox/Drive/Tasks verification
+- keep Composio as the preferred long-term integration surface, but do not block immediate verification on a missing local Composio runner

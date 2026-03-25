@@ -21,8 +21,9 @@ Define the verified inbox access path MailTriage is allowed to use.
   - Gmail app-password/IMAP path
   - another approved local mail path
 
-## Primary candidate
-- Composio Gmail integration
+## Primary candidates
+1. `gog` Gmail access (near-term verification path)
+2. Composio Gmail integration (preferred long-term integration surface)
 
 ## Temporary status
-MailTriage should continue writing `blocked-no-inbox-access` until this contract is verified.
+MailTriage should continue writing `blocked-no-inbox-access` until one of the above paths is verified from this host/runtime.
