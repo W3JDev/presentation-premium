@@ -89,8 +89,8 @@ When the user expresses any of the following, record it here or convert it into 
 
 ## Open Items
 
-- Verify the live run outputs for the scheduled `W3J Ops Nightly Session Briefing` cron job.
-- Verify the live run outputs for the scheduled `W3J Google Drive Meeting Notes Poller` cron job.
+- Debug and verify run execution for the scheduled `W3J Ops Nightly Session Briefing` cron job; current state is enqueued but not yet producing run logs or workspace artifacts.
+- Debug and verify run execution for the scheduled `W3J Google Drive Meeting Notes Poller` cron job; current state is enqueued but not yet producing run logs or workspace artifacts.
 - Implement cron/job verification workflow with live execution checks and per-job logs.
 - Build QuickBooks Time automation with verified 2FA/session handling.
 - Harden Google Drive meeting-notes → Google Tasks pipeline from scheduled skeleton into verified end-to-end Composio execution.
