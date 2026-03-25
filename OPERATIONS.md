@@ -89,8 +89,9 @@ When the user expresses any of the following, record it here or convert it into 
 
 ## Open Items
 
-- Debug and verify run execution for the scheduled `W3J Ops Nightly Session Briefing` cron job; current state is enqueued but not yet producing run logs or workspace artifacts.
-- Debug and verify run execution for the scheduled `W3J Google Drive Meeting Notes Poller` cron job; current state is enqueued but not yet producing run logs or workspace artifacts.
+- Resolve OpenClaw version split (`/home/linuxbrew/.linuxbrew/bin/openclaw` = 2026.3.11 vs gateway/service/config = 2026.3.23-2) before trusting local CLI verification results.
+- Re-run and verify the scheduled `W3J Ops Nightly Session Briefing` cron job after delivery hardening; current logic executes and writes artifacts, but inbox integration remains blocked.
+- Re-run and verify the scheduled `W3J Google Drive Meeting Notes Poller` cron job after delivery hardening; current logic executes and writes artifacts, but source/destination contracts and Composio runner path remain blocked.
 - Implement cron/job verification workflow with live execution checks and per-job logs.
 - Build QuickBooks Time automation with verified 2FA/session handling.
 - Harden Google Drive meeting-notes → Google Tasks pipeline from scheduled skeleton into verified end-to-end Composio execution.
