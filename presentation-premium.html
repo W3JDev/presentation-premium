@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Architecture - Technical Deep Dive</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/theme/white.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/monokai.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        .reveal .slides { text-align: center; }
+        .reveal .slides section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 20px 40px;
+            box-sizing: border-box;
+            font-size: 0.72em;
+        }
+        .reveal .slides section > * {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        .reveal h1 { font-size: 2.5em; color: #1a1a2e; }
+        .reveal h2 { font-size: 1.8em; color: #16213e; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.3em; color: #0f3460; }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1700px;
+            width: 100%;
+            text-align: left;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 1700px;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background: #f0f4f8;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin: 10px 0;
+            text-align: left;
+        }
+        
+        .step-box {
+            background: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            padding: 8px 16px;
+            margin: 4px 0;
+            font-weight: 500;
+        }
+        
+        .reveal pre { width: 100%; }
+        .reveal pre code {
+            max-height: 450px;
+            font-size: 0.85em;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .feature-card h4 { color: white; margin-bottom: 10px; }
+        .feature-card p { font-size: 0.85em; opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Cover Slide -->
+            <section>
+                <h1>🤖 AI Agent Architecture</h1>
+                <h3>Building Autonomous Systems with LangGraph & MCP</h3>
+                <p style="color: #666; margin-top: 40px;">W3J LLC Technical Deep Dive</p>
+                <p style="color: #999; font-size: 0.7em;">March 2026</p>
+            </section>
+
+            <!-- Agenda -->
+            <section>
+                <h2>📋 Agenda</h2>
+                <div style="text-align: left; max-width: 800px;">
+                    <div class="step-box">1. Agent Paradigm Shift</div>
+                    <div class="step-box">2. LangGraph Core Concepts</div>
+                    <div class="step-box">3. MCP (Model Context Protocol)</div>
+                    <div class="step-box">4. Architecture Patterns</div>
+                    <div class="step-box">5. Production Considerations</div>
+                </div>
+            </section>
+
+            <!-- Problem Statement -->
+            <section>
+                <h2>⚠️ The Problem</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>Traditional LLM Apps</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Single prompt → single response</li>
+                            <li>No memory across sessions</li>
+                            <li>No tool access</li>
+                            <li>No iterative reasoning</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>What We Need</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>Multi-step reasoning</li>
+                            <li>Tool execution & validation</li>
+                            <li>Stateful conversations</li>
+                            <li>Agentic autonomy</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Overview -->
+            <section>
+                <h2>🏗️ Agent System Architecture</h2>
+                <div class="mermaid">
+                    graph TD
+                        A[User Query] --> B[Agent Coordinator]
+                        B --> C[State Graph]
+                        C --> D{LLM Router}
+                        D -->|needs data| E[Tool Executor]
+                        D -->|needs memory| F[Memory Manager]
+                        D -->|needs reasoning| G[Reasoning Engine]
+                        E --> H[External APIs]
+                        H --> C
+                        F --> I[Vector Store]
+                        I --> C
+                        G --> C
+                        C --> J[Final Response]
+                </div>
+                <aside class="notes">The agent coordinates multiple specialized components through a state graph.</aside>
+            </section>
+
+            <!-- LangGraph Core -->
+            <section>
+                <h2>🔷 LangGraph Core Concepts</h2>
+                <div class="grid-3">
+                    <div class="feature-card">
+                        <h4>State</h4>
+                        <p>Shared mutable data across nodes</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Nodes</h4>
+                        <p>Python functions that process state</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Edges</h4>
+                        <p>Conditional routing between nodes</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <strong>Key Insight:</strong> LangGraph treats agent workflows as directed graphs with cycles — enabling true agentic behavior.
+                </div>
+            </section>
+
+            <!-- Code Example -->
+            <section>
+                <h2>💻 Minimal Agent Example</h2>
+                <pre><code class="language-python">from langgraph.graph import StateGraph, END
+
+# Define state schema
+class AgentState(TypedDict):
+    messages: list
+    next_action: str
+
+# Create graph
+graph = StateGraph(AgentState)
+
+# Add nodes
+graph.add_node("think", think_node)
+graph.add_node("act", act_node)
+
+# Define edges
+graph.set_entry_point("think")
+graph.add_conditional_edges("think", should_continue)
+graph.add_edge("act", "think")
+graph.add_edge("act", END)
+
+# Compile and run
+app = graph.compile()
+result = app.invoke({"messages": [...]})</code></pre>
+            </section>
+
+            <!-- MCP Protocol -->
+            <section>
+                <h2>🔗 MCP (Model Context Protocol)</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>What is MCP?</h3>
+                        <p>Open standard for AI ↔ tools communication</p>
+                        <table class="comparison-table">
+                            <tr><th>Component</th><th>Role</th></tr>
+                            <tr><td>Client</td><td>LLM application</td></tr>
+                            <tr><td>Server</td><td>Tool provider</td></tr>
+                            <tr><td>Protocol</td><td>JSON-RPC 2.0</td></tr>
+                        </table>
+                    </div>
+                    <div>
+                        <h3>Standardized Tools</h3>
+                        <ul style="font-size: 0.9em;">
+                            <li>File system access</li>
+                            <li>Database queries</li>
+                            <li>API integrations</li>
+                            <li>Code execution</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pattern: ReAct -->
+            <section>
+                <h2>🔄 ReAct Pattern</h2>
+                <div style="font-size: 0.85em; text-align: left;">
+                    <p><strong>Reason → Act → Observe cycle</strong></p>
+                    <div class="step-box">Thought: "I need to check the user's calendar"</div>
+                    <div class="step-box">Action: call_calendar_tool</div>
+                    <div class="step-box">Observation: "User has meeting at 3pm"</div>
+                    <div class="step-box">Thought: "Now I can suggest a time"</div>
+                </div>
+                <div class="highlight-box" style="margin-top: 20px;">
+                    <strong>Why it works:</strong> Explicit reasoning traces → better debuggability → reliable agents
+                </div>
+            </section>
+
+            <!-- Production Considerations -->
+            <section>
+                <h2>⚡ Production Considerations</h2>
+                <table class="comparison-table" style="max-width: 1400px;">
+                    <tr>
+                        <th>Concern</th>
+                        <th>Solution</th>
+                    </tr>
+                    <tr>
+                        <td>Cost control</td>
+                        <td>Token budgets, early exit strategies</td>
+                    </tr>
+                    <tr>
+                        <td>Latency</td>
+                        <td>Async tools, parallel execution</td>
+                    </tr>
+                    <tr>
+                        <td>Reliability</td>
+                        <td>Try-catch boundaries, fallback LLMs</td>
+                    </tr>
+                    <tr>
+                        <td>Security</td>
+                        <td>Sandboxed execution, input validation</td>
+                    </tr>
+                    <tr>
+                        <td>Observability</td>
+                        <td>Structured logging, trace visualization</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2>📋 Summary</h2>
+                <div class="highlight-box">
+                    <strong>Key Takeaways:</strong>
+                </div>
+                <ul style="text-align: left; max-width: 900px;">
+                    <li>Agents = LLM + stateful graph + tool execution</li>
+                    <li>LangGraph provides the orchestration primitives</li>
+                    <li>MCP standardizes tool communication</li>
+                    <li>ReAct enables reliable reasoning traces</li>
+                </ul>
+                <p style="margin-top: 40px; color: #666;">💎 W3J LLC — Building the future of AI automation</p>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+        
+        async function renderAllMermaid() {
+            const mermaidDivs = document.querySelectorAll('.mermaid');
+            for (let i = 0; i < mermaidDivs.length; i++) {
+                const el = mermaidDivs[i];
+                if (el.getAttribute('data-processed')) continue;
+                const graphDef = el.textContent.trim();
+                if (!graphDef) continue;
+                try {
+                    const { svg } = await mermaid.render('mermaid-svg-' + i, graphDef);
+                    el.innerHTML = svg;
+                    el.setAttribute('data-processed', 'true');
+                } catch(e) { console.error('Mermaid error:', e); }
+            }
+        }
+
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            plugins: [RevealHighlight, RevealNotes],
+            onReady: renderAllMermaid
+        });
+    </script>
+</body>
+</html>
